@@ -27,9 +27,10 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     Image dbImage;
     Timer frame, count;
     boolean press[] = {false, false, false, false, false};
-    double pos = 0, rand;
+    double pos = 0;
     ArrayList<Integer> scores = new ArrayList<Integer>();
-    int score = 0, time = 0, bullx, bully, screen = 0, menu = 2;
+    int score = 0, screen = 0, menu = 2;
+    ArrayList<Aircraft> planes = new ArrayList<Aircraft>();
 
     public CulmWill() {
         frame = new Timer(30, this); //sets the delay between frames
@@ -38,15 +39,13 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         count = new Timer(30, new ActionListener() { // this will run the code inside ever 30ms
             @Override
             public void actionPerformed(ActionEvent e) {
-                time++;
-
-                /// I commented out condition for bullx = 0, this code will 
                 /// determine how long the image of the plane accelerates
-                if (bullx == 0 || time > 100) { //if its off screen 
-                    time = 0;
-                    rand = 0;// Math.random() * Math.PI * 2; /// sets double to a random number between 0 and 6.2
-                    bullx = (int) (Math.sin(rand) * 400 + 400); //spawn a new one
-                    bully = (int) (Math.cos(rand) * 400);
+                for (int a = 0; a < planes.size() + 1; a++) {
+                    if (planes.get(a).getT == 0) { //if its off screen  
+                        planes.add(new Aircraft(Math.random() * Math.PI * 2));
+                    }
+
+                    time++;
                 }
             }
         });
@@ -121,7 +120,6 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                                 PrintWriter pw = new PrintWriter(fw); //starts writing
                                 for (int i = 0; i < 10; i++) {
                                     pw.println(scores.get(i));
-                                    System.out.println(scores.get(i));
                                 }
                                 pw.close(); //stop writing
                             } catch (IOException a) {
@@ -140,10 +138,12 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 break;
             case (2): // Game
                 /// ALL THE CODE BELOW WILL ROTATE        
-                draw.rotate(pos, 400, 0); /// rotate Graphics2D draw in circle
-                int size = (int) Math.pow(2, 0.15 * (time));
+                draw.rotate(pos, 400, 0); /// rotate Graphics2D draw in circle                
                 draw.drawImage(new ImageIcon("space.png").getImage(), -550, -950, getWidth() * 2 + 300, getWidth() * 2 + 300, this); /// draw the background image
-                draw.drawImage(new ImageIcon("airplane.png").getImage(), bullx - size / 2, bully - size / 2, size, size, this);
+
+                for (int a = 0; a < planes.size(); a++) {
+                    draw.drawImage(new ImageIcon("airplane.png").getImage(), planes.get(a).getPosistionX() - planes.get(a).getSizeX() / 2, planes.get(a).getPosistionY() - planes.get(a).getSizeY() / 2, planes.get(a).getSizeX(), planes.get(a).getSizeY(), this);
+                }
                 draw.rotate(-pos, 400, 0); //all the code below wont rotate
 
                 /// ALL THE CODE BELOW WILL NOT ROTATE   
@@ -164,31 +164,30 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                         pos = 0;
                     }
                 }
-
-                if (press[2] == true) { //checks which key is being pressed
-                    //shoot            
-                    if (pos <= rand + 0.15 && pos >= rand - 0.15) { //checks if plane is within the radian range
-                        time = 200; //resets time and position
-                        bullx = 3000;
-                        score++;
+                for (int a = 0; a < planes.size(); a++) {
+                    if (press[2] == true) { //checks which key is being pressed
+                        //shoot                                    
+                        if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //checks if plane is within the radian range
+                            planes.remove(a);
+                            score++;
+                        }
+                    } else if (press[3] == true) {
+                        //power
                     }
-                } else if (press[3] == true) {
-                    //power
+                    if (planes.get(a).getAge() > 99 && planes.get(a).getAge() < 110 && pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //if too close gameover
+                        screen = 2;
+                        score = 0;
+                    }
+                    break;
                 }
-                if (time > 99 && time < 110 && pos <= rand + 0.15 && pos >= rand - 0.15) { //if too close gameover
-                    screen = 2;
-                    score = 0;
-                }
-                break;
             case (3): //add score
                 scores.add(score);
                 Collections.sort(scores, Collections.reverseOrder());
+                screen = 4;
                 break;
             case (4)://Game over sceen
                 draw.drawString("GAME OVER", 300, 32);
                 draw.drawString("SCORE: " + score, 250, 132);
-
-                screen = 4;
                 break;
         }
         super.paintComponents(g);
@@ -231,9 +230,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             press[2] = false;
         } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
             press[3] = false;
-            
-            
-            
+
         }
 
     }
