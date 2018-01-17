@@ -39,13 +39,18 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         count = new Timer(30, new ActionListener() { // this will run the code inside ever 30ms
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 /// determine how long the image of the plane accelerates
-                for (int a = 0; a < planes.size() + 1; a++) {
-                    if (planes.get(a).getT == 0) { //if its off screen  
+                if (planes.size() < 1) {
+                    planes.add(new Aircraft(Math.random() * Math.PI * 2));
+                }
+
+                for (int a = 0; a < planes.size(); a++) {
+                    if (planes.get(a).getAge() > 100) { //if its off screen  
+                        planes.remove(a);
                         planes.add(new Aircraft(Math.random() * Math.PI * 2));
                     }
-
-                    time++;
+                    planes.get(a).grow();
                 }
             }
         });
@@ -87,6 +92,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     }
 
     public void paintComponent(Graphics g) {
+
         draw = (Graphics2D) g; /// Graphics2D draw = Graphics g casted as a Graphics2D object
         draw.setFont(new Font("Consolas", Font.PLAIN, 20)); /// set the font for Graphics g to consolas
         switch (screen) {
@@ -164,22 +170,27 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                         pos = 0;
                     }
                 }
-                for (int a = 0; a < planes.size(); a++) {
-                    if (press[2] == true) { //checks which key is being pressed
-                        //shoot                                    
+
+                if (press[2] == true) { //checks which key is being pressed
+                    //shoot             
+                    for (int a = 0; a < planes.size(); a++) {
                         if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //checks if plane is within the radian range
-                            planes.remove(a);
                             score++;
+                            planes.get(a).setPosistionX(3300);
+                            planes.get(a).setPosistionY(3300);
                         }
-                    } else if (press[3] == true) {
-                        //power
                     }
+                } else if (press[3] == true) {
+                    //power
+                }
+                for (int a = 0; a < planes.size(); a++) {
                     if (planes.get(a).getAge() > 99 && planes.get(a).getAge() < 110 && pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //if too close gameover
                         screen = 2;
                         score = 0;
                     }
-                    break;
                 }
+                break;
+
             case (3): //add score
                 scores.add(score);
                 Collections.sort(scores, Collections.reverseOrder());
