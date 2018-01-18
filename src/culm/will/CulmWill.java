@@ -45,7 +45,11 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     planes.add(new Aircraft(Math.random() * Math.PI * 2));
                 }
                 for (int a = 0; a < planes.size(); a++) {
-                    planes.get(a).grow();
+                    if (planes.get(a).getColour() != "cringegrid.gif") {
+                        planes.get(a).grow(true);
+                    } else {
+                        planes.get(a).grow(false);
+                    }
                     if (planes.get(a).getAge() > 100) { //if its off screen  
                         planes.remove(a);
                     }
@@ -145,7 +149,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 draw.drawImage(new ImageIcon("space.png").getImage(), -550, -950, getWidth() * 2 + 300, getWidth() * 2 + 300, this); /// draw the background image
 
                 for (int a = 0; a < planes.size(); a++) {
-                    draw.drawImage(new ImageIcon("airplane.png").getImage(), planes.get(a).getPosistionX() - planes.get(a).getSizeX() / 2, planes.get(a).getPosistionY() - planes.get(a).getSizeY() / 2, planes.get(a).getSizeX(), planes.get(a).getSizeY(), this);
+                    draw.drawImage(new ImageIcon(planes.get(a).getColour()).getImage(), planes.get(a).getPosistionX() - planes.get(a).getSizeX() / 2, planes.get(a).getPosistionY() - planes.get(a).getSizeY() / 2, planes.get(a).getSizeX(), planes.get(a).getSizeY(), this);
                 }
                 draw.rotate(-pos, 400, 0); //all the code below wont rotate
 
@@ -171,10 +175,9 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 if (press[2] == true) { //checks which key is being pressed
                     //shoot             
                     for (int a = 0; a < planes.size(); a++) {
-                        if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //checks if plane is within the radian range
+                        if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15 && (planes.get(a).getColour() != "cringegrid.gif")) { //checks if plane is within the radian range
                             score++;
-                            explosion(planes.get(a).getPosistionX(), planes.get(a).getPosistionY(), planes.get(a).getSizeX(), planes.get(a).getSizeY());
-                            planes.remove(a);
+                            planes.get(a).setColour("cringegrid.gif");
                         }
                     }
                 } else if (press[3] == true) {
@@ -200,10 +203,6 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 break;
         }
         super.paintComponents(g);
-    }
-
-    public void explosion(int posx, int posy, int sizex, int sizey) {
-        draw.drawImage(new ImageIcon("cringegrid.png").getImage(), posx, posy, sizex, sizey, this);
     }
 
     @Override

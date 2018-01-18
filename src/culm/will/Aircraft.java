@@ -21,7 +21,7 @@ public class Aircraft {
     // Variables involving time 
     private int age; // the time since the aircraft has been spawned
     // Variables involving aircraft aesthetics
-    final private String colour; // the colour of the aircraft, either "purpleAircraft.png" or "yellowAirCraft.png"
+    private String colour; // the colour of the aircraft, either "purpleAircraft.png" or "yellowAirCraft.png"
 
     /**
      * Aircraft Constructor (purple)
@@ -65,9 +65,11 @@ public class Aircraft {
         return posistionY; // return statement
     }
 
-    public void grow() {
-        sizeX = (int) Math.pow(2, 0.15 * (age));
-        sizeY = (int) Math.pow(2, 0.15 * (age));
+    public void grow(boolean size) {
+        if (size == true) {
+            sizeX = (int) Math.pow(2, 0.15 * (age));
+            sizeY = (int) Math.pow(2, 0.15 * (age));
+        }
         age++;
     }
 
@@ -97,5 +99,10 @@ public class Aircraft {
 
     public String getColour() {
         return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+
     }
 }
