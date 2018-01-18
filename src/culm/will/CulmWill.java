@@ -40,16 +40,15 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                /// determine how long the image of the plane accelerates
-                if (planes.size() < 1) {
+                /// determine how long the image of the plane accelerates               
+                if (planes.size() < 1 || Math.random() * 6000 < 10) { //if its off screen  
                     planes.add(new Aircraft(Math.random() * Math.PI * 2));
                 }
-
                 for (int a = 0; a < planes.size(); a++) {
-                    if (Math.random() * 6000 < 10) { //if its off screen  
-                        planes.add(new Aircraft(Math.random() * Math.PI * 2));
-                    }
                     planes.get(a).grow();
+                    if (planes.get(a).getAge() > 100) { //if its off screen  
+                        planes.remove(a);
+                    }
                 }
             }
         });
@@ -91,7 +90,6 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     }
 
     public void paintComponent(Graphics g) {
-
         draw = (Graphics2D) g; /// Graphics2D draw = Graphics g casted as a Graphics2D object
         draw.setFont(new Font("Consolas", Font.PLAIN, 20)); /// set the font for Graphics g to consolas
         switch (screen) {
@@ -175,6 +173,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     for (int a = 0; a < planes.size(); a++) {
                         if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //checks if plane is within the radian range
                             score++;
+                            explosion(planes.get(a).getPosistionX(), planes.get(a).getPosistionY(), planes.get(a).getSizeX(), planes.get(a).getSizeY());
                             planes.remove(a);
                         }
                     }
@@ -201,6 +200,10 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 break;
         }
         super.paintComponents(g);
+    }
+
+    public void explosion(int posx, int posy, int sizex, int sizey) {
+        draw.drawImage(new ImageIcon("cringegrid.png").getImage(), posx, posy, sizex, sizey, this);
     }
 
     @Override
