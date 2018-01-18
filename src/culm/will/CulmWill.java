@@ -46,7 +46,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 }
 
                 for (int a = 0; a < planes.size(); a++) {
-                    if (Math.random() * 1000 < 10) { //if its off screen  
+                    if (Math.random() * 6000 < 10) { //if its off screen  
                         planes.add(new Aircraft(Math.random() * Math.PI * 2));
                     }
                     planes.get(a).grow();
@@ -183,7 +183,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 }
                 for (int a = 0; a < planes.size(); a++) {
                     if (planes.get(a).getAge() > 99 && planes.get(a).getAge() < 110 && pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //if too close gameover
-                        screen = 2;
+                        screen = 3;
                         score = 0;
                         System.out.println("GAMEOVER");
                     }
@@ -222,7 +222,9 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             press[4] = true;
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            if (screen == 2) {
+            if (screen == 0) {
+                System.exit(1);
+            } else if (screen == 2) {
                 screen = 3;
             } else {
                 screen = 0;

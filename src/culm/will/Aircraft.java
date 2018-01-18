@@ -12,16 +12,16 @@ public class Aircraft {
 
     // Variables involving posistion
     private double angle;
-    private int posistionX; // the horizontal posistion on the screen
-    private int posistionY; // the vertical posistion on the screen
-    private int radius = 400; // radius from center of the screen
+    final private int posistionX; // the horizontal posistion on the screen
+    final private int posistionY; // the vertical posistion on the screen
+    final private int radius = 400; // radius from center of the screen
     // Variables involving size
     private int sizeX; // horizontal size
     private int sizeY; // vertical size
     // Variables involving time 
     private int age; // the time since the aircraft has been spawned
     // Variables involving aircraft aesthetics
-    private String colour; // the colour of the aircraft, either "purpleAircraft.png" or "yellowAirCraft.png"
+    final private String colour; // the colour of the aircraft, either "purpleAircraft.png" or "yellowAirCraft.png"
 
     /**
      * Aircraft Constructor (purple)
