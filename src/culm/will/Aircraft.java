@@ -71,22 +71,6 @@ public class Aircraft {
         age++;
     }
 
-    public void setPosistionX(int posistionX) {
-        this.posistionX = posistionX;
-    }
-
-    public void setPosistionY(int posistionY) {
-        this.posistionY = posistionY;
-    }
-
-    public void setSizeX(int sizeX) {
-        this.sizeX = sizeX;
-    }
-
-    public void setSizeY(int sizeY) {
-        this.sizeY = sizeY;
-    }
-
     public int getPosistionX() {
         return posistionX;
     }
@@ -103,7 +87,7 @@ public class Aircraft {
         return sizeY;
     }
 
-    public double getAngle() {        
+    public double getAngle() {
         return angle;
     }
 
