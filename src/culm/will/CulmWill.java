@@ -45,7 +45,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     planes.add(new Aircraft(Math.random() * Math.PI * 2));
                 }
                 for (int a = 0; a < planes.size(); a++) {
-                    if (planes.get(a).getColour() != "cringegrid.gif") {
+                    if (planes.get(a).getColour() != "Explode_fire.gif") {
                         planes.get(a).grow(true);
                     } else {
                         planes.get(a).grow(false);
@@ -175,9 +175,9 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 if (press[2] == true) { //checks which key is being pressed
                     //shoot             
                     for (int a = 0; a < planes.size(); a++) {
-                        if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15 && (planes.get(a).getColour() != "cringegrid.gif")) { //checks if plane is within the radian range
+                        if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15 && (planes.get(a).getColour() != "Explode_fire.gif")) { //checks if plane is within the radian range
                             score++;
-                            planes.get(a).setColour("cringegrid.gif");
+                            planes.get(a).setColour("Explode_fire.gif");
                         }
                     }
                 } else if (press[3] == true) {
