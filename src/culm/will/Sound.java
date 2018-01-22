@@ -25,7 +25,7 @@ public class Sound implements LineListener {
     public Sound(String[] tracks) {
         this.tracks = tracks;
 
-        playSound(new File(tracks[currentSong]), true);
+        playSound(new File(tracks[currentSong++]), true);
     }
 
     public Sound(String effect) {
