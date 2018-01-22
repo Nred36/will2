@@ -32,6 +32,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     ArrayList<Integer> scores = new ArrayList<Integer>();
     int score = 0, screen = 0, menu = 2;
     ArrayList<Aircraft> planes = new ArrayList<Aircraft>();
+    Sound play;
 
     public CulmWill() {
         frame = new Timer(30, this); //sets the delay between frames
@@ -70,8 +71,10 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             System.out.println("Couldn't Load");
         }
 
-        addKeyListener(this); //checks if keys are pressed        
+        String[] rawr = {"chewy_roar.wav", "jedi-know.wav", "killyouif.wav", "light-saber-on.wav", "swvader02.wav"}; // create a new File object with the directory of the audio as the parameter
+        play = new Sound(rawr);
 
+        addKeyListener(this); //checks if keys are pressed
     }
 
     public static void main(String[] args) {
@@ -84,10 +87,6 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         f.setSize(800, 600); /// Set the size to 800 width by 600 height
         f.setVisible(true); /// set the visibility to true
         f.setLocationRelativeTo(null); /// center the window
-
-        String[] rawr = {"chewy_roar.wav", "jedi-know.wav", "killyouif.wav", "light-saber-on.wav", "swvader02.wav"}; // create a new File object with the directory of the audio as the parameter
-        Sound s = new Sound(rawr);
-
     }
 
     public void paint(Graphics g) { //double buffer
@@ -182,14 +181,16 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     for (int a = 0; a < planes.size(); a++) {
                         if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15 && (planes.get(a).getColour() != "Explode_fire.gif")) { //checks if plane is within the radian range
                             score++;
+                            planes.get(a).setColour("dead");
                             planes.get(a).setColour("Explode_fire.gif");
+                            play = new Sound("explode.wav");
                         }
                     }
                 } else if (press[3] == true) {
                     //power
                 }
                 for (int a = 0; a < planes.size(); a++) {
-                    if (planes.get(a).getAge() > 99 && planes.get(a).getAge() < 110 && pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //if too close gameover
+                    if (planes.get(a).getColour() != "dead" && planes.get(a).getAge() > 99 && planes.get(a).getAge() < 110 && pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //if too close gameover
                         screen = 3;
                         score = 0;
                         System.out.println("GAMEOVER");

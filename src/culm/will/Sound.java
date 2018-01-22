@@ -27,11 +27,11 @@ public class Sound implements LineListener {
     public Sound(String[] tracks) {
         this.tracks = tracks;
 
-        playSound(new File(tracks[currentSong]));
+        playSound(new File(tracks[currentSong]), true);
     }
 
     public Sound(String effect) {
-        playSound(new File(effect));
+        playSound(new File(effect), false);
     }
 
     /**
@@ -39,35 +39,23 @@ public class Sound implements LineListener {
      *
      * @param sound
      */
-    int getClipLength(File sound) {
-        try {
-            Clip clip = AudioSystem.getClip(); // create Clip object clip and set it to AudioStream.getClip()
-            clip.open(AudioSystem.getAudioInputStream(sound)); // open the audiostream with input stream
-            clip.start(); // start the clip           
-
-            return (int) clip.getMicrosecondLength() / 1000;
-        } catch (Exception e) {
-
-        }
-        return 0;
-    }
-
-    void playSound(File sound) {
+    private void playSound(File sound, Boolean repeat) {
         // SURROUND IN A TRY CATCH 
         try {
             Clip clip = AudioSystem.getClip(); // create Clip object clip and set it to AudioStream.getClip()
             clip.open(AudioSystem.getAudioInputStream(sound)); // open the audiostream with input stream
             clip.start(); // start the clip
-            clip.addLineListener(this);
+            if (repeat == true) {
+                clip.addLineListener(this);
+            }
         } catch (Exception e) {
-
         }
     }
 
     @Override
     public void update(LineEvent event) {
         if (event.toString().startsWith("Stop")) {
-            playSound(new File(tracks[currentSong]));
+            playSound(new File(tracks[currentSong]), true);
             if (currentSong + 1 < tracks.length) {
                 currentSong++;
             } else {
