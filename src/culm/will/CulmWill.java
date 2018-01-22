@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -69,7 +70,8 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             System.out.println("Couldn't Load");
         }
 
-        addKeyListener(this); //checks if keys are pressed
+        addKeyListener(this); //checks if keys are pressed        
+
     }
 
     public static void main(String[] args) {
@@ -82,6 +84,9 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         f.setSize(800, 600); /// Set the size to 800 width by 600 height
         f.setVisible(true); /// set the visibility to true
         f.setLocationRelativeTo(null); /// center the window
+
+        String[] rawr = {"chewy_roar.wav", "jedi-know.wav", "killyouif.wav", "light-saber-on.wav", "swvader02.wav"}; // create a new File object with the directory of the audio as the parameter
+        Sound s = new Sound(rawr);
 
     }
 
