@@ -53,18 +53,32 @@ public class Aircraft {
         sizeY = 0;
     }
 
+    /**
+     * This method returns the horizontal position using the angle
+     * @param angle
+     * @return posistionX
+     */
     private int angleInRadiansToPosistionX(double angle) {
         int posistionX; // variable for the horizontal posistion
         posistionX = (int) (Math.sin(angle) * radius + radius); // convert an angle in radians to a horizontal position on a plane with a set radius
         return posistionX; // return statement
     }
 
+    /**
+     * This method returns the vertical position using the angle
+     * @param angle
+     * @return posistionY
+     */
     private int angleInRadiansToPosistionY(double angle) {
         int posistionY; // variable for the vertical posistion
         posistionY = (int) (Math.cos(angle) * radius); // convert an angle in radians to a vertical position on a plane with a set radius
         return posistionY; // return statement
     }
 
+    /**
+     * This method increases the size variable for x and y
+     * @param size 
+     */
     public void grow(boolean size) {
         if (size == true) {
             sizeX = (int) Math.pow(2, 0.15 * (age));
@@ -73,34 +87,66 @@ public class Aircraft {
         age++;
     }
 
+    /**
+     * returns the horizontal position
+     * @return posistionX
+     */
     public int getPosistionX() {
         return posistionX;
     }
 
+    /**
+     * returns the vertical position
+     * @return posistionY
+     */
     public int getPosistionY() {
         return posistionY;
     }
 
+    /**
+     * returns the horizontal size
+     * @return sizeX
+     */
     public int getSizeX() {
         return sizeX;
     }
 
+    /**
+     * return the vertical size
+     * @return sizeY
+     */
     public int getSizeY() {
         return sizeY;
     }
 
+    /**
+     * returns the angle
+     * @return angle
+     */
     public double getAngle() {
         return angle;
     }
 
+    /**
+     * returns the the time the object has been alive
+     * @return age
+     */
     public int getAge() {
         return age;
     }
 
+    /**
+     * return the variation of the aircraft type
+     * @return colour
+     */
     public String getColour() {
         return colour;
     }
 
+    /**
+     * set the type of aircraft
+     * @param colour 
+     */
     public void setColour(String colour) {
         this.colour = colour;
 
