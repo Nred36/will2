@@ -29,13 +29,13 @@ public class Aircraft {
      * @param angle
      */
     public Aircraft(double angle) {
-        colour = "Aircraft.png"; // set the colour as the default (purple)
+        colour = "aircraft.png"; // set the colour as the default (purple)
         posistionX = angleInRadiansToPosistionX(angle); // set the initial horizontal posistion 
         posistionY = angleInRadiansToPosistionY(angle); // set the initial vertical posistion
         age = 0; // set the inital age of the aircraft to 0
-        sizeX = 0;
-        sizeY = 0;
-        this.angle = angle;
+        sizeX = 0; // sets the inital sizeX to 0
+        sizeY = 0; // sets the inital sizeY to 0
+        this.angle = angle; // sets the angle to what is put in
     }
 
     /**
@@ -48,9 +48,10 @@ public class Aircraft {
         this.colour = colour; // set the colour, either "purpleAircraft.png" or "yellowAirCraft.png"
         posistionX = angleInRadiansToPosistionX(angle);
         posistionY = angleInRadiansToPosistionY(angle);
-        age = 0;
-        sizeX = 0;
-        sizeY = 0;
+        age = 0; // set the inital age of the aircraft to 0
+        sizeX = 0; // sets the inital sizeX to 0
+        sizeY = 0; // sets the inital sizeY to 0
+        this.angle = angle; // sets the angle to what is put in
     }
 
     /**
@@ -81,10 +82,10 @@ public class Aircraft {
      */
     public void grow(boolean size) {
         if (size == true) {
-            sizeX = (int) Math.pow(2, 0.15 * (age));
-            sizeY = (int) Math.pow(2, 0.15 * (age));
+            sizeX = (int) Math.pow(2, 0.15 * (age)); // grows the horizontal size
+            sizeY = (int) Math.pow(2, 0.15 * (age)); // grows the vertical size
         }
-        age++;
+        age++; // increments the age
     }
 
     /**
