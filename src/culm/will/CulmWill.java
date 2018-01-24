@@ -178,21 +178,19 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
 
                 if (press[2] == true) { //checks which key is being pressed
                     //shoot             
+                    play = new Sound("light-saber-on.wav");
                     for (int a = 0; a < planes.size(); a++) {
                         if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15 && (planes.get(a).getColour() != "Explode_fire.gif")) { //checks if plane is within the radian range
                             score++;
-                            planes.get(a).setColour("dead");
                             planes.get(a).setColour("Explode_fire.gif");
                             play = new Sound("explode.wav");
                         }
                     }
-                } else if (press[3] == true) {
-                    //power
                 }
+
                 for (int a = 0; a < planes.size(); a++) {
-                    if (planes.get(a).getColour() != "dead" && planes.get(a).getAge() > 99 && planes.get(a).getAge() < 110 && pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //if too close gameover
+                    if (planes.get(a).getColour() != "Explode_fire.gif" && planes.get(a).getAge() > 99 && planes.get(a).getAge() < 110 && pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //if too close gameover
                         screen = 3;
-                        score = 0;
                         System.out.println("GAMEOVER");
                     }
                 }
