@@ -27,8 +27,8 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     private Graphics dbg;
     Graphics2D draw;
     Image dbImage;
-    Timer frame, count;
-    boolean press[] = {false, false, false, false, false};
+    Timer frame, count, fire;
+    int press[] = {0, 0, 0, 0, 0};
     double pos = 0;
     ArrayList<Integer> scores = new ArrayList<Integer>();
     int score = 0, screen = 0, menu = 2;
@@ -37,7 +37,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
 
     /**
      * CulmWill constructor
-     * 
+     *
      * Creates CulmWill object as well as other necessary startup processes such
      * as setting up the timer, filereader, and tracklist among others
      */
@@ -65,7 +65,13 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 }
             }
         });
-
+        fire = new Timer(250, new ActionListener() { // this will run the code inside ever 30ms
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                press[2] = 2;
+                fire.setRepeats(false);
+            }
+        });
         try {
             FileReader fr = new FileReader("scores.txt");
             BufferedReader br = new BufferedReader(fr); //reads map from text file
@@ -85,8 +91,9 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     }
 
     /**
-     * Main class for project that calls constructors and creates jRrame 
-     * @param args 
+     * Main class for project that calls constructors and creates jRrame
+     *
+     * @param args
      */
     public static void main(String[] args) {
         CulmWill panel = new CulmWill(); /// create new CulmWill object panel
@@ -101,11 +108,12 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     }
 
     /**
-     * paint method 
-     * 
-     * Double buffers meaning it writes it offscreen and then writes it again and compares.
-     * consult with Nathan for what that means he can elaborate.
-     * @param g 
+     * paint method
+     *
+     * Double buffers meaning it writes it offscreen and then writes it again
+     * and compares. consult with Nathan for what that means he can elaborate.
+     *
+     * @param g
      */
     public void paint(Graphics g) { //double buffer
         dbImage = createImage(getWidth(), getHeight()); /// set Image dbImage to an image with 794 by 571 
@@ -117,9 +125,10 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
 
     /**
      * paint component
-     * 
+     *
      * Paints to the screen.
-     * @param g 
+     *
+     * @param g
      */
     public void paintComponent(Graphics g) {
         draw = (Graphics2D) g; /// Graphics2D draw = Graphics g casted as a Graphics2D object
@@ -132,14 +141,14 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 draw.drawString("Exit", getWidth() / 2 - (g.getFontMetrics().stringWidth("Exit")) / 2, getHeight() - 50);
                 draw.drawRect(getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2 - 5, getHeight() / 4 * menu - 68, 140, 20);
 
-                if (press[2] == true && menu > 2) {
+                if (press[2] == 1 && menu > 2) {
                     menu -= 1;
-                    press[2] = false;
-                } else if (press[3] == true && menu < 4) {
+                    press[2] = 0;
+                } else if (press[3] == 1 && menu < 4) {
                     menu += 1;
-                    press[3] = false;
-                } else if (press[4] == true) {
-                    press[4] = false;
+                    press[3] = 0;
+                } else if (press[4] == 1) {
+                    press[4] = 0;
                     switch (menu) {
                         case (2):
                             screen = 1;
@@ -185,25 +194,25 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 draw.drawString("SCORE: " + score, 300, 30); /// draw a string that lists the score at 300 300
                 draw.drawImage(new ImageIcon("cockpit.png").getImage(), 000, 200, 800, 400, this);
 
-                if (press[0] == true) { //checks which key is being pressed
+                if (press[0] == 1) { //checks which key is being pressed
                     pos -= .04; //moves left
                     if (pos <= 0) {
                         pos = Math.PI * 2;
                     }
-                } else if (press[1] == true) {
+                } else if (press[1] == 1) {
                     pos += .04; //moves right
                     if (pos >= Math.PI * 2) {
                         pos = 0;
                     }
                 }
 
-                if (press[2] == true) { //checks which key is being pressed
+                if (press[2] == 1) { //checks which key is being pressed
                     //Shoot             
                     play = new Sound("light-saber-on.wav");
                     draw.setColor(Color.yellow);
 
                     draw.setStroke(new BasicStroke(2));
-                    draw.setXORMode(Color.green);
+                    draw.setXORMode(Color.pink);
                     draw.drawLine(400, 0, (int) (Math.cos(-0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(-0.15 + (Math.PI / 2)) * 400));
                     draw.drawLine(400, 0, (int) (Math.cos(0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(0.15 + (Math.PI / 2)) * 400));
                     draw.dispose();
@@ -239,9 +248,10 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
 
     /**
      * keytyped method
-     * 
+     *
      * not used
-     * @param e 
+     *
+     * @param e
      */
     @Override
     public void keyTyped(KeyEvent e) {
@@ -250,23 +260,25 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
 
     /**
      * keypressed method
-     * 
+     *
      * presses the key
-     * @param e 
+     *
+     * @param e
      */
     @Override
     public void keyPressed(KeyEvent e) {
 
         if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
-            press[0] = true;
+            press[0] = 1;
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            press[1] = true;
-        }else if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_UP) {
-            press[2] = true;
+            press[1] = 1;
+        } else if (press[2] == 0 && (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_UP)) {
+            press[2] = 1;
+            fire.start();
         } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
-            press[3] = true;
+            press[3] = 1;
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            press[4] = true;
+            press[4] = 1;
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             if (screen == 0) {
                 System.exit(1);
@@ -280,27 +292,28 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
 
     /**
      * keyReleased method
-     * 
+     *
      * for movement
-     * @param e 
+     *
+     * @param e
      */
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
-            press[0] = false;
+            press[0] = 0;
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            press[1] = false;
+            press[1] = 0;
         } else if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
-            press[2] = false;
+            press[2] = 0;
         }
-
     }
 
     /**
      * action performed
-     * 
+     *
      * Sets the fps
-     * @param e 
+     *
+     * @param e
      */
     @Override
     public void actionPerformed(ActionEvent e) {
