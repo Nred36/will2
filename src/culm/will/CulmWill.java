@@ -1,5 +1,7 @@
 package culm.will;//package name
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -161,9 +163,6 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 draw.drawString("SCORE: " + score, 300, 30); /// draw a string that lists the score at 300 300
                 draw.drawImage(new ImageIcon("cockpit.png").getImage(), 000, 200, 800, 400, this);
 
-                draw.drawLine(400, 0, (int) (Math.cos(-0.15 + (Math.PI / 2)) * 800) + 400, (int) (Math.sin(-0.15 + (Math.PI / 2)) * 800));
-                draw.drawLine(400, 0, (int) (Math.cos(0.15 + (Math.PI / 2)) * 800) + 400, (int) (Math.sin(0.15 + (Math.PI / 2)) * 800));
-
                 if (press[0] == true) { //checks which key is being pressed
                     pos -= .04; //moves left
                     if (pos <= 0) {
@@ -179,6 +178,10 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 if (press[2] == true) { //checks which key is being pressed
                     //shoot             
                     play = new Sound("light-saber-on.wav");
+                    draw.setColor(Color.GREEN);
+                    draw.setStroke(new BasicStroke(2));
+                    draw.drawLine(400, 0, (int) (Math.cos(-0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(-0.15 + (Math.PI / 2)) * 400));
+                    draw.drawLine(400, 0, (int) (Math.cos(0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(0.15 + (Math.PI / 2)) * 400));
                     for (int a = 0; a < planes.size(); a++) {
                         if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15 && (planes.get(a).getColour() != "Explode_fire.gif")) { //checks if plane is within the radian range
                             score++;
