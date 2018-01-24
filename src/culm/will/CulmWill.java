@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -178,10 +177,13 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 if (press[2] == true) { //checks which key is being pressed
                     //Shoot             
                     play = new Sound("light-saber-on.wav");
-                    draw.setColor(Color.GREEN);
+                    draw.setColor(Color.yellow);
+
                     draw.setStroke(new BasicStroke(2));
+                    draw.setXORMode(Color.green);
                     draw.drawLine(400, 0, (int) (Math.cos(-0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(-0.15 + (Math.PI / 2)) * 400));
                     draw.drawLine(400, 0, (int) (Math.cos(0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(0.15 + (Math.PI / 2)) * 400));
+                    draw.dispose();
                     for (int a = 0; a < planes.size(); a++) {
                         if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15 && (planes.get(a).getColour() != "Explode_fire.gif")) { //checks if plane is within the radian range
                             score++;
@@ -189,7 +191,6 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                             play = new Sound("explode.wav");
                         }
                     }
-                    press[2] = false;
                 }
 
                 for (int a = 0; a < planes.size(); a++) {
@@ -225,8 +226,6 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             press[0] = true;
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             press[1] = true;
-        } else if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
-            press[2] = true;
         } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
             press[3] = true;
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -248,6 +247,8 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             press[0] = false;
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             press[1] = false;
+        } else if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
+            press[2] = false;
         }
 
     }
