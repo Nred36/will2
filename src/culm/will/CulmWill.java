@@ -73,7 +73,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             System.out.println("Couldn't Load");
         }
 
-        String[] rawr = {"chewy_roar.wav", "jedi-know.wav", "killyouif.wav", "light-saber-on.wav", "swvader02.wav"}; // create a new File object with the directory of the audio as the parameter
+        String[] rawr = {"songBlackdice.wav", "songBlackjack.wav", "songBreathe.wav", "songDeathGrips2.wav", "songGreenCalx.wav", "songGuns.wav", "songPluto.wav", "songRockNroll.wav", "songWeHaveExplosives.wav"}; // create a new File object with the directory of the audio as the parameter
         play = new Sound(rawr);
 
         addKeyListener(this); //checks if keys are pressed
@@ -176,7 +176,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 }
 
                 if (press[2] == true) { //checks which key is being pressed
-                    //shoot             
+                    //Shoot             
                     play = new Sound("light-saber-on.wav");
                     draw.setColor(Color.GREEN);
                     draw.setStroke(new BasicStroke(2));
@@ -189,6 +189,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                             play = new Sound("explode.wav");
                         }
                     }
+                    press[2] = false;
                 }
 
                 for (int a = 0; a < planes.size(); a++) {
@@ -247,11 +248,6 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             press[0] = false;
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             press[1] = false;
-        } else if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
-            press[2] = false;
-        } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
-            press[3] = false;
-
         }
 
     }
