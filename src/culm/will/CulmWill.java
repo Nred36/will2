@@ -54,7 +54,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     planes.add(new Aircraft(Math.random() * Math.PI * 2));
                 }
                 for (int a = 0; a < planes.size(); a++) {
-                    if (planes.get(a).getColour() != "Explode_fire.gif") {
+                    if (planes.get(a).getColour() != "Explode_fire_1.gif") {
                         planes.get(a).grow(true);
                     } else {
                         planes.get(a).grow(false);
@@ -222,16 +222,16 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     draw.drawLine(400, 0, (int) (Math.cos(0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(0.15 + (Math.PI / 2)) * 400));
                     draw.dispose();
                     for (int a = 0; a < planes.size(); a++) {
-                        if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15 && (planes.get(a).getColour() != "Explode_fire.gif")) { //checks if plane is within the radian range
+                        if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15 && (planes.get(a).getColour() != "Explode_fire_1.gif")) { //checks if plane is within the radian range
                             score++;
-                            planes.get(a).setColour("Explode_fire.gif");
+                            planes.get(a).setColour("Explode_fire_1.gif");
                             play = new Sound("explode.wav");
                         }
                     }
                 }
 
                 for (int a = 0; a < planes.size(); a++) {
-                    if (planes.get(a).getColour() != "Explode_fire.gif" && planes.get(a).getAge() > 99 && planes.get(a).getAge() < 110 && pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //if too close gameover
+                    if (planes.get(a).getColour() != "Explode_fire_1.gif" && planes.get(a).getAge() > 99 && planes.get(a).getAge() < 110 && pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //if too close gameover
                         screen = 3;
                         System.out.println("GAMEOVER");
                     }
