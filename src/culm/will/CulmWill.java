@@ -65,11 +65,15 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 }
             }
         });
-        fire = new Timer(250, new ActionListener() { // this will run the code inside ever 30ms
+        fire = new Timer(500, new ActionListener() { // this will run the code inside ever 30ms
             @Override
             public void actionPerformed(ActionEvent e) {
-                press[2] = 2;
-                fire.setRepeats(false);
+                if (press[2] == 1) {
+                    press[2] = 2;
+                } else {
+                    press[2] = 0;
+                    fire.stop();
+                }
             }
         });
         try {
@@ -192,6 +196,9 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
 
                 /// ALL THE CODE BELOW WILL NOT ROTATE   
                 draw.drawString("SCORE: " + score, 300, 30); /// draw a string that lists the score at 300 300
+                if (press[2] == 1) {
+                    draw.setXORMode(Color.pink);
+                }
                 draw.drawImage(new ImageIcon("cockpit.png").getImage(), 000, 200, 800, 400, this);
 
                 if (press[0] == 1) { //checks which key is being pressed
@@ -210,9 +217,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     //Shoot             
                     play = new Sound("light-saber-on.wav");
                     draw.setColor(Color.yellow);
-
                     draw.setStroke(new BasicStroke(2));
-                    draw.setXORMode(Color.pink);
                     draw.drawLine(400, 0, (int) (Math.cos(-0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(-0.15 + (Math.PI / 2)) * 400));
                     draw.drawLine(400, 0, (int) (Math.cos(0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(0.15 + (Math.PI / 2)) * 400));
                     draw.dispose();
@@ -267,12 +272,13 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-
+        System.out.println(e.getKeyChar());
         if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
             press[0] = 1;
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             press[1] = 1;
-        } else if (press[2] == 0 && (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_UP)) {
+        }
+        if (press[2] == 0 && (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP)) {
             press[2] = 1;
             fire.start();
         } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -303,8 +309,10 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             press[0] = 0;
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             press[1] = 0;
-        } else if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
+        }
+        if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
             press[2] = 0;
+            fire.stop();
         }
     }
 
