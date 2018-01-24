@@ -88,7 +88,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             System.out.println("Couldn't Load");
         }
 
-        String[] rawr = {"songBlackdice.wav", "songBlackjack.wav", "songBreathe.wav", "songDeathGrips2.wav", "songGreenCalx.wav", "songGuns.wav", "songPluto.wav", "songRockNroll.wav", "songWeHaveExplosives.wav"}; // create a new File object with the directory of the audio as the parameter
+        String[] rawr = {"songGreenCalx.wav", "songBlackjack.wav", "songWeHaveExplosives.wav", "songBlackdice.wav",  "songGuns.wav", "songDeathGrips2.wav", "songBreathe.wav", "songPluto.wav", "songRockNroll.wav"}; // create a new File object with the directory of the audio as the parameter
         play = new Sound(rawr);
 
         addKeyListener(this); //checks if keys are pressed
