@@ -29,7 +29,7 @@ public class Aircraft {
      * @param angle
      */
     public Aircraft(double angle) {
-        colour = "purpleAircraft.png"; // set the colour as the default (purple)
+        colour = "Aircraft.png"; // set the colour as the default (purple)
         posistionX = angleInRadiansToPosistionX(angle); // set the initial horizontal posistion 
         posistionY = angleInRadiansToPosistionY(angle); // set the initial vertical posistion
         age = 0; // set the inital age of the aircraft to 0
