@@ -36,6 +36,12 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     ArrayList<Aircraft> planes = new ArrayList<Aircraft>();
     Sound play;
 
+    /**
+     * CulmWill constructor
+     * 
+     * Creates CulmWill object as well as other necessary startup processes such
+     * as setting up the timer, filereader, and tracklist among others
+     */
     public CulmWill() {
         frame = new Timer(30, this); //sets the delay between frames
         frame.start(); /// starts the timer
@@ -79,6 +85,10 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         addKeyListener(this); //checks if keys are pressed
     }
 
+    /**
+     * Main class for project that calls constructors and creates jRrame 
+     * @param args 
+     */
     public static void main(String[] args) {
         CulmWill panel = new CulmWill(); /// create new CulmWill object panel
         JFrame f = new JFrame("Game"); /// create JFrame object j with titlename "Game"
@@ -91,6 +101,13 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         f.setLocationRelativeTo(null); /// center the window
     }
 
+    /**
+     * paint method 
+     * 
+     * Double buffers meaning it writes it offscreen and then writes it again and compares.
+     * consult with Nathan for what that means he can elaborate.
+     * @param g 
+     */
     public void paint(Graphics g) { //double buffer
         dbImage = createImage(getWidth(), getHeight()); /// set Image dbImage to an image with 794 by 571 
         dbg = dbImage.getGraphics(); /// set the Graphics dbg to graphics of dbImage
@@ -99,6 +116,12 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         g.drawImage(dbImage, 0, 0, this); // call Graphics method on g to drawImage dbImage at top left corner        
     }
 
+    /**
+     * paint component
+     * 
+     * Paints to the screen.
+     * @param g 
+     */
     public void paintComponent(Graphics g) {
         draw = (Graphics2D) g; /// Graphics2D draw = Graphics g casted as a Graphics2D object
         draw.setFont(new Font("Consolas", Font.PLAIN, 20)); /// set the font for Graphics g to consolas
@@ -213,11 +236,23 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         super.paintComponents(g);
     }
 
+    /**
+     * keytyped method
+     * 
+     * not used
+     * @param e 
+     */
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
 
+    /**
+     * keypressed method
+     * 
+     * presses the key
+     * @param e 
+     */
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -242,6 +277,12 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         }
     }
 
+    /**
+     * keyReleased method
+     * 
+     * for movement
+     * @param e 
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -252,6 +293,12 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
 
     }
 
+    /**
+     * action performed
+     * 
+     * Sets the fps
+     * @param e 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
