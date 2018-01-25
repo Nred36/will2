@@ -207,6 +207,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 if (press[2] == 1) {
                     draw.setXORMode(Color.green);
                 }
+                draw.drawImage(new ImageIcon("cockControls.gif").getImage(), 000, 200, 800, 400, this);
                 draw.drawImage(new ImageIcon("cockpit.png").getImage(), 000, 200, 800, 400, this);
 
                 if (press[0] == 1) { //checks which key is being pressed
