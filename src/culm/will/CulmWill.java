@@ -141,11 +141,14 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         draw.setFont(new Font("Consolas", Font.PLAIN, 20)); /// set the font for Graphics g to consolas
         switch (screen) {
             case (0): //Main Menu
+                draw.setXORMode(colour); // set XOR mode with pinkf
+                draw.drawImage(new ImageIcon ("spaceM.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
                 draw.drawString("ProtoBlaster 2070: Xortors Prime", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 4 - 50);
-                draw.drawString("Flight Records", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 2 - 50);
-                draw.drawString("Engage", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 4 * 3 - 50);
-                draw.drawString("Eject", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() - 50);
-                draw.drawRect(getWidth() / 2 - (g.getFontMetrics().stringWidth("Flight Records")) / 2 - 5, getHeight() / 4 * menu - 68, 140, 20);
+                draw.drawString("Flight Records", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 2 - 52);
+                draw.drawString("Engage", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 4 * 3 - 53);
+                draw.drawString("Eject", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() - 55);
+                draw.drawRect(getWidth() / 2 -100, getHeight() / 4 * menu - 68, 20, 20);
+                draw.dispose();
 
                 if (press[2] == 1 && menu > 2) {
                     menu -= 1;
@@ -255,7 +258,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 break;
             case (4)://Game over case "sceen"
                 draw.setXORMode(colour); // set XOR mode with pink
-                draw.drawImage(new ImageIcon ("boppingHead.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
+                draw.drawImage(new ImageIcon ("title.png").getImage(), 0, 0, getWidth(), getWidth(), this);
                 draw.setFont(new Font("MS Serif", Font.PLAIN, 300)); // set font size larger
                 draw.drawString("GAME", getWidth()/2-g.getFontMetrics().stringWidth("GAME")/2, 200); // draw "game " as text on screen
                 draw.drawString("OVER", getWidth()/2-g.getFontMetrics().stringWidth("OVER")/2, getHeight()/2+280); // draw " over" as text on screen
