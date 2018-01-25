@@ -55,7 +55,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     planes.add(new Aircraft(Math.random() * Math.PI * 2));
                 }
                 for (int a = 0; a < planes.size(); a++) {
-                    if (planes.get(a).getColour() != "Explode_fire_1.gif") {
+                    if (planes.get(a).getColour() != "src//Explode_fire_1.gif") {
                         planes.get(a).grow(true);
                     } else {
                         planes.get(a).grow(false);
@@ -78,7 +78,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             }
         });
         try {
-            FileReader fr = new FileReader("scores.txt");
+            FileReader fr = new FileReader("src//scores.txt");
             BufferedReader br = new BufferedReader(fr); //reads map from text file
             for (int i = 0; i < 10; i++) {
                 scores.add(Integer.parseInt(br.readLine()));
@@ -142,7 +142,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         switch (screen) {
             case (0): //Main Menu
                 draw.setXORMode(colour); // set XOR mode with pinkf
-                draw.drawImage(new ImageIcon ("spaceM.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
+                draw.drawImage(new ImageIcon ("src//spaceM.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
                 draw.drawString("ProtoBlaster 2070: Xortors Prime", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 4 - 50);
                 draw.drawString("Flight Records", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 2 - 52);
                 draw.drawString("Engage", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 4 * 3 - 53);
@@ -185,7 +185,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 break;
             case (1): //highscore
                 draw.setXORMode(Color.green); // set XOR mode with pinkf
-                draw.drawImage(new ImageIcon ("boppingHead.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
+                draw.drawImage(new ImageIcon ("src//boppingHead.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
                 draw.drawString("HIGHSCORES", 100, 30);
                 for (int i = 0; i < 10; i++) {
                     draw.drawString(scores.get(i) + "", 100, 60 + 30 * i);
@@ -195,7 +195,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             case (2): // Game
                 /// ALL THE CODE BELOW WILL ROTATE        
                 draw.rotate(pos, 400, 0); /// rotate Graphics2D draw in circle                
-                draw.drawImage(new ImageIcon("spaceM.gif").getImage(), -550, -950, getWidth() * 2 + 300, getWidth() * 2 + 300, this); /// draw the background image
+                draw.drawImage(new ImageIcon("src//spaceM.gif").getImage(), -550, -950, getWidth() * 2 + 300, getWidth() * 2 + 300, this); /// draw the background image
 
                 for (int a = 0; a < planes.size(); a++) {
                     draw.drawImage(new ImageIcon(planes.get(a).getColour()).getImage(), planes.get(a).getPosistionX() - planes.get(a).getSizeX() / 2, planes.get(a).getPosistionY() - planes.get(a).getSizeY() / 2, planes.get(a).getSizeX(), planes.get(a).getSizeY(), this);
@@ -207,8 +207,8 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 if (press[2] == 1) {
                     draw.setXORMode(Color.green);
                 }
-                draw.drawImage(new ImageIcon("cockControls.gif").getImage(), 000, 200, 800, 400, this);
-                draw.drawImage(new ImageIcon("cockpit.png").getImage(), 000, 200, 800, 400, this);
+                draw.drawImage(new ImageIcon("src//cockControls.gif").getImage(), 000, 200, 800, 400, this);
+                draw.drawImage(new ImageIcon("src//cockpit.png").getImage(), 000, 200, 800, 400, this);
 
                 if (press[0] == 1) { //checks which key is being pressed
                     pos -= .04; //moves left
@@ -231,10 +231,10 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     draw.drawLine(400, 0, (int) (Math.cos(0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(0.15 + (Math.PI / 2)) * 400));
                     draw.dispose();
                     for (int a = 0; a < planes.size(); a++) {
-                        if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15 && (planes.get(a).getColour() != "Explode_fire_1.gif")) { //checks if plane is within the radian range
+                        if (pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15 && (planes.get(a).getColour() != "src//Explode_fire_1.gif")) { //checks if plane is within the radian range
                             score++;
-                            planes.get(a).setColour("Explode_fire_1.gif");
-                            play = new Sound("explode.wav");
+                            planes.get(a).setColour("src//Explode_fire_1.gif");
+                            play = new Sound("src//explode.wav");
                         }
                     }
                 }
@@ -243,7 +243,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 for (int a = 0; a < planes.size(); a++) {
                     /// if statement to tell when the game is over and end it
                     if (
-                            planes.get(a).getColour() != "Explode_fire_1.gif" && /// if the "a"th plane in the planes array is the explosion animation
+                            planes.get(a).getColour() != "src//Explode_fire_1.gif" && /// if the "a"th plane in the planes array is the explosion animation
                             planes.get(a).getAge() > 99 && /// and if that that plane's age is greater than 99
                             planes.get(a).getAge() < 110 && /// and if that age is less than 110
                             pos <= planes.get(a).getAngle() + 0.15 && /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
@@ -265,7 +265,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 break;
             case (4)://Game over case "sceen"
                 draw.setXORMode(colour); // set XOR mode with pink
-                draw.drawImage(new ImageIcon ("title.png").getImage(), 0, 0, getWidth(), getWidth(), this);
+                draw.drawImage(new ImageIcon ("src//title.png").getImage(), 0, 0, getWidth(), getWidth(), this);
                 draw.setFont(new Font("MS Serif", Font.PLAIN, 300)); // set font size larger
                 draw.drawString("GAME", getWidth()/2-g.getFontMetrics().stringWidth("GAME")/2, 200); // draw "game " as text on screen
                 draw.drawString("OVER", getWidth()/2-g.getFontMetrics().stringWidth("OVER")/2, getHeight()/2+280); // draw " over" as text on screen
