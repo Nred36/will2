@@ -153,8 +153,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     menu -= 1;
                     press[2] = 0;
                 } else if (press[3] == 1 && menu < 4) {
-                    menu += 1;
-                    press[3] = 0;
+                    menu += 1;                    
                 } else if (press[4] == 1) {
                     press[4] = 0;
                     switch (menu) {
@@ -336,6 +335,8 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             press[0] = 0; // set the 
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             press[1] = 0;
+        }else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
+            press[3] = 0;
         }
         if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
             press[2] = 0;
