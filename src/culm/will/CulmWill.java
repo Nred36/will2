@@ -34,6 +34,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     int score = 0, screen = 0, menu = 2;
     ArrayList<Aircraft> planes = new ArrayList<Aircraft>();
     Sound play;
+    Color colour;
 
     /**
      * CulmWill constructor
@@ -92,6 +93,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         play = new Sound(rawr);
 
         addKeyListener(this); //checks if keys are pressed
+        colour = new Color((int)(Math.random() * 0x1000000));
     }
 
     /**
@@ -139,11 +141,11 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         draw.setFont(new Font("Consolas", Font.PLAIN, 20)); /// set the font for Graphics g to consolas
         switch (screen) {
             case (0): //Main Menu
-                draw.drawString("Title Screen", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 4 - 50);
-                draw.drawString("High Scores", getWidth() / 2 - (g.getFontMetrics().stringWidth("High Scores")) / 2, getHeight() / 2 - 50);
-                draw.drawString("Play", getWidth() / 2 - (g.getFontMetrics().stringWidth("Play")) / 2, getHeight() / 4 * 3 - 50);
-                draw.drawString("Exit", getWidth() / 2 - (g.getFontMetrics().stringWidth("Exit")) / 2, getHeight() - 50);
-                draw.drawRect(getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2 - 5, getHeight() / 4 * menu - 68, 140, 20);
+                draw.drawString("ProtoBlaster 2070: Xortors Prime", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 4 - 50);
+                draw.drawString("Flight Records", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 2 - 50);
+                draw.drawString("Engage", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 4 * 3 - 50);
+                draw.drawString("Eject", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() - 50);
+                draw.drawRect(getWidth() / 2 - (g.getFontMetrics().stringWidth("Flight Records")) / 2 - 5, getHeight() / 4 * menu - 68, 140, 20);
 
                 if (press[2] == 1 && menu > 2) {
                     menu -= 1;
@@ -230,22 +232,36 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     }
                 }
 
+                /// for each plane in the plane arrayList
                 for (int a = 0; a < planes.size(); a++) {
-                    if (planes.get(a).getColour() != "Explode_fire_1.gif" && planes.get(a).getAge() > 99 && planes.get(a).getAge() < 110 && pos <= planes.get(a).getAngle() + 0.15 && pos >= planes.get(a).getAngle() - 0.15) { //if too close gameover
-                        screen = 3;
-                        System.out.println("GAMEOVER");
+                    /// if statement to tell when the game is over and end it
+                    if (
+                            planes.get(a).getColour() != "Explode_fire_1.gif" && /// if the "a"th plane in the planes array is the explosion animation
+                            planes.get(a).getAge() > 99 && /// and if that that plane's age is greater than 99
+                            planes.get(a).getAge() < 110 && /// and if that age is less than 110
+                            pos <= planes.get(a).getAngle() + 0.15 && /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
+                            pos >= planes.get(a).getAngle() - 0.15) { /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
+                        screen = 3; /// set the screen (gamestate?) to "3" which is the "add score" case???? (why isn't this done here?)
+                        System.out.println("GAMEOVER"); /// output "gameover" in the console for debugging reasons
                     }
                 }
                 break;
 
-            case (3): //add score
-                scores.add(score);
-                Collections.sort(scores, Collections.reverseOrder());
-                screen = 4;
+            case (3): // add score case
+                scores.add(score); // add the current score to the score arrayList
+                Collections.sort(scores, Collections.reverseOrder()); // sort the arrayList
+                screen = 4; /// set the screen (gamestate?) to "4"???? which is the game over screen case
+                colour = new Color((int)(Math.random() * 0x1000000));
                 break;
-            case (4)://Game over sceen
-                draw.drawString("GAME OVER", 300, 32);
-                draw.drawString("SCORE: " + score, 250, 132);
+            case (4)://Game over case "sceen"
+                draw.setXORMode(colour); // set XOR mode with pink
+                draw.drawImage(new ImageIcon ("boppingHead.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
+                draw.setFont(new Font("MS Serif", Font.PLAIN, 300)); // set font size larger
+                draw.drawString("GAME", getWidth()/2-g.getFontMetrics().stringWidth("GAME")/2, 200); // draw "game " as text on screen
+                draw.drawString("OVER", getWidth()/2-g.getFontMetrics().stringWidth("OVER")/2, getHeight()/2+280); // draw " over" as text on screen
+                draw.setFont(new Font("Consolas", Font.PLAIN, 20)); // set font size to smaller
+                draw.drawString("SCORE: " + score, getWidth()/2-g.getFontMetrics().stringWidth("SCORE: 999")/2, getHeight()/2); // draw "SCORE:" with the score on the screen 
+                draw.dispose(); // end xormode
                 break;
         }
         super.paintComponents(g);
@@ -293,6 +309,9 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             } else {
                 screen = 0;
             }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_F) {
+            screen=3;
         }
     }
 
