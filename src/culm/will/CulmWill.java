@@ -60,7 +60,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     } else {
                         planes.get(a).grow(false);
                     }
-                    if (planes.get(a).getAge() > 100) { //if its off screen  
+                    if (planes.get(a).getAge() > 150) { //if its off screen  
                         planes.remove(a);
                     }
                 }
@@ -197,9 +197,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 draw.drawImage(new ImageIcon("resources//spaceM.gif").getImage(), -550, -950, getWidth() * 2 + 300, getWidth() * 2 + 300, this); /// draw the background image
 
                 for (int a = 0; a < planes.size(); a++) {
-                    if (planes.get(a).getAngle() < pos + Math.PI / 2 && planes.get(a).getAngle() > pos - Math.PI / 2) { //only draws the planes on the screen
-                        draw.drawImage(new ImageIcon(planes.get(a).getColour()).getImage(), planes.get(a).getPosistionX() - planes.get(a).getSizeX() / 2, planes.get(a).getPosistionY() - planes.get(a).getSizeY() / 2, planes.get(a).getSizeX(), planes.get(a).getSizeY(), this);
-                    }
+                    draw.drawImage(new ImageIcon(planes.get(a).getColour()).getImage(), planes.get(a).getPosistionX() - planes.get(a).getSizeX() / 2, planes.get(a).getPosistionY() - planes.get(a).getSizeY() / 2, planes.get(a).getSizeX(), planes.get(a).getSizeY(), this);
                 }
                 draw.rotate(-pos, 400, 0); //all the code below wont rotate
 
@@ -243,8 +241,8 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 for (int a = 0; a < planes.size(); a++) {
                     /// if statement to tell when the game is over and end it
                     if (planes.get(a).getColour() != "resources//Explode_fire_1.gif" && /// if the "a"th plane in the planes array is the explosion animation
-                            planes.get(a).getAge() > 99 && /// and if that that plane's age is greater than 99
-                            planes.get(a).getAge() < 110 && /// and if that age is less than 110
+                            planes.get(a).getAge() > 149 && /// and if that that plane's age is greater than 99
+                            planes.get(a).getAge() < 160 && /// and if that age is less than 110
                             pos <= planes.get(a).getAngle() + 0.15 && /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
                             pos >= planes.get(a).getAngle() - 0.15) { /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
                         screen = 3; /// set the  to "3" which is the "add score" case???? (why isn't this done here?)
