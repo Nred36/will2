@@ -115,7 +115,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
 
     /**
      * paint method
-     *
+     *f
      * Double buffers meaning it writes it offscreen and then writes it again
      * and compares. consult with Nathan for what that means he can elaborate.
      *
@@ -184,25 +184,28 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 }
                 break;
             case (1): //highscore
+                draw.setXORMode(Color.green); // set XOR mode with pinkf
+                draw.drawImage(new ImageIcon ("boppingHead.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
                 draw.drawString("HIGHSCORES", 100, 30);
                 for (int i = 0; i < 10; i++) {
                     draw.drawString(scores.get(i) + "", 100, 60 + 30 * i);
                 }
+                draw.dispose();
                 break;
             case (2): // Game
                 /// ALL THE CODE BELOW WILL ROTATE        
                 draw.rotate(pos, 400, 0); /// rotate Graphics2D draw in circle                
-                draw.drawImage(new ImageIcon("space.png").getImage(), -550, -950, getWidth() * 2 + 300, getWidth() * 2 + 300, this); /// draw the background image
+                draw.drawImage(new ImageIcon("spaceM.gif").getImage(), -550, -950, getWidth() * 2 + 300, getWidth() * 2 + 300, this); /// draw the background image
 
                 for (int a = 0; a < planes.size(); a++) {
                     draw.drawImage(new ImageIcon(planes.get(a).getColour()).getImage(), planes.get(a).getPosistionX() - planes.get(a).getSizeX() / 2, planes.get(a).getPosistionY() - planes.get(a).getSizeY() / 2, planes.get(a).getSizeX(), planes.get(a).getSizeY(), this);
                 }
                 draw.rotate(-pos, 400, 0); //all the code below wont rotate
 
-                /// ALL THE CODE BELOW WILL NOT ROTATE   
-                draw.drawString("SCORE: " + score, 300, 30); /// draw a string that lists the score at 300 300
+                /// ALL THE CODE BELOW WILL NOT ROTATE 
+                
                 if (press[2] == 1) {
-                    draw.setXORMode(Color.pink);
+                    draw.setXORMode(Color.green);
                 }
                 draw.drawImage(new ImageIcon("cockpit.png").getImage(), 000, 200, 800, 400, this);
 
@@ -221,7 +224,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 if (press[2] == 1) { //checks which key is being pressed
                     //Shoot             
                     play = new Sound("light-saber-on.wav");
-                    draw.setColor(Color.yellow);
+                    draw.setColor(Color.white);
                     draw.setStroke(new BasicStroke(2));
                     draw.drawLine(400, 0, (int) (Math.cos(-0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(-0.15 + (Math.PI / 2)) * 400));
                     draw.drawLine(400, 0, (int) (Math.cos(0.15 + (Math.PI / 2)) * 400) + 400, (int) (Math.sin(0.15 + (Math.PI / 2)) * 400));
@@ -248,6 +251,9 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                         System.out.println("GAMEOVER"); /// output "gameover" in the console for debugging reasons
                     }
                 }
+                draw.setXORMode(Color.green);
+                draw.drawString("SCORE: " + score, 300, 30); /// draw a string that lists the score at 300 300
+                draw.dispose();
                 break;
 
             case (3): // add score case
