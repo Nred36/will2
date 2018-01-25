@@ -82,8 +82,8 @@ public class Aircraft {
      */
     public void grow(boolean size) {
         if (size == true) {
-            sizeX = (int) Math.pow(1.7, 0.15 * (age)); // grows the horizontal size
-            sizeY = (int) Math.pow(1.7, 0.15 * (age)); // grows the vertical size
+            sizeX = (int) Math.pow(1.9, 0.15 * (age)-1); // grows the horizontal size
+            sizeY = (int) Math.pow(1.9, 0.15 * (age)-1); // grows the vertical size
         }
         age++; // increments the age
     }

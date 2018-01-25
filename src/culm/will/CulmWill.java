@@ -305,8 +305,8 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
-            press[0] = 0;
+        if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) { // if the a key or the left arrow key is pressed
+            press[0] = 0; // set the 
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             press[1] = 0;
         }
@@ -325,8 +325,8 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        repaint();
-        requestFocus();
-        setFocusTraversalKeysEnabled(false);
+        repaint(); // repaints 
+        requestFocus(); //request focus
+        setFocusTraversalKeysEnabled(false); ///?? No idea what this does
     }
 }
