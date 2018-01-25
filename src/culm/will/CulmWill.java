@@ -31,7 +31,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     int press[] = {0, 0, 0, 0, 0};
     double pos = 0;
     ArrayList<Integer> scores = new ArrayList<Integer>();
-    int score = 0, screen = 0, menu = 2;
+    int score = 0, screen = 0, menu = 3;
     ArrayList<Aircraft> planes = new ArrayList<Aircraft>();
     Sound play;
     Color colour;
@@ -153,7 +153,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                     menu -= 1;
                     press[2] = 0;
                 } else if (press[3] == 1 && menu < 4) {
-                    menu += 1;                    
+                    menu += 1;
                 } else if (press[4] == 1) {
                     press[4] = 0;
                     switch (menu) {
@@ -170,7 +170,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                                 FileWriter fw = new FileWriter("resources//scores.txt");//set place to write to in "Files"
                                 PrintWriter pw = new PrintWriter(fw); //starts writing
                                 for (int i = 0; i < 10; i++) {
-                                    pw.println(scores.get(i));                                   
+                                    pw.println(scores.get(i));
                                 }
                                 pw.close(); //stop writing
                             } catch (IOException a) {
@@ -180,6 +180,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                             break;
                     }
                 }
+                press[3] = 0;
                 break;
             case (1): //highscore
                 draw.setXORMode(Color.green); // set XOR mode with pinkf
@@ -247,11 +248,10 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                             pos <= planes.get(a).getAngle() + 0.15 && /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
                             pos >= planes.get(a).getAngle() - 0.15) { /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
                         screen = 3; /// set the  to "3" which is the "add score" case???? (why isn't this done here?)
-                        System.out.println("GAMEOVER"); /// output "gameover" in the console for debugging reasons
                     }
                 }
                 draw.setXORMode(Color.green);
-                draw.drawString("SCORE: " + score, 300, 30); /// draw a string that lists the score at 300 300
+                draw.drawString("SCORE: " + score, getWidth() / 2 - (g.getFontMetrics().stringWidth("SCORE: " + score)) / 2, 30); /// draw a string that lists the score at 300 300
                 draw.dispose();
                 break;
 
@@ -310,13 +310,13 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             press[4] = 1;
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             if (screen == 0) {
-                System.exit(1);
+                System.exit(0);
             } else if (screen == 2) {
                 screen = 3;
             } else {
                 screen = 0;
             }
-        }       
+        }
     }
 
     /**
@@ -332,8 +332,6 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             press[0] = 0; // set the 
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             press[1] = 0;
-        }else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
-            press[3] = 0;
         }
         if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
             press[2] = 0;
