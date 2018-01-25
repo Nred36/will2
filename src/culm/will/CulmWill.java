@@ -129,7 +129,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     }
 
     /**
-     * paint component
+     * paintComponent
      *
      * Paints to the screen.
      *
@@ -276,7 +276,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     }
 
     /**
-     * keytyped method
+     * keyTyped method
      *
      * not used
      *
@@ -288,7 +288,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     }
 
     /**
-     * keypressed method
+     * keyPressed method
      *
      * presses the key
      *
