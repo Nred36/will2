@@ -239,8 +239,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
 
                 /// for each plane in the plane arrayList
                 for (int a = 0; a < planes.size(); a++) {
-                    /// if statement to tell when the game is over and end it       
-                    System.out.println(planes.get(a).getAngle() + 0.5 + " " + pos + " " + planes.get(a).getAngle() + 0.5);
+                    /// if statement to tell when the game is over and end it                          
                     if (planes.get(a).getColour() != "resources//Explode_fire_1.gif" && /// if the "a"th plane in the planes array is the explosion animation
                             planes.get(a).getAge() > 149 && /// and if that that plane's age is greater than 99
                             planes.get(a).getAge() < 160 && /// and if that age is less than 110
