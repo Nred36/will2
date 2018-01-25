@@ -316,10 +316,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             } else {
                 screen = 0;
             }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_F) {
-            screen = 3;
-        }
+        }       
     }
 
     /**
