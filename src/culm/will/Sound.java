@@ -10,24 +10,30 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
-import javax.swing.Timer;
 
 /**
- *
+ * Sound class for sound objects
  * @author wipri9236
  */
 public class Sound implements LineListener {
+    // INSTANCE VARIABLES
+    private String[] tracks; // String array of tracks optionally used when constructing the object
+    private int currentSong = 0;
 
-    String[] tracks;
-    int currentSong = 0;
-    Timer c;
-
+    /**
+     * Sound constructor for sound objects with more than one sound file to use
+     * @param tracks 
+     */
     public Sound(String[] tracks) {
         this.tracks = tracks;
 
         playSound(new File(tracks[currentSong++]), true);
     }
 
+    /**
+     * Sound constructor for sound objects with one sound file to use
+     * @param effect 
+     */
     public Sound(String effect) {
         playSound(new File(effect), false);
     }
@@ -50,6 +56,10 @@ public class Sound implements LineListener {
         }
     }
 
+    /**
+     * Overridding the update method
+     * @param event 
+     */
     @Override
     public void update(LineEvent event) {
         if (event.toString().startsWith("Stop")) {
