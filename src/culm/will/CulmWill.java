@@ -89,11 +89,11 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             System.out.println("Couldn't Load");
         }
 
-        String[] rawr = {"songGreenCalx.wav", "songBlackjack.wav", "songWeHaveExplosives.wav", "songBlackdice.wav",  "songGuns.wav", "songDeathGrips2.wav", "songBreathe.wav", "songPluto.wav", "songRockNroll.wav"}; // create a new File object with the directory of the audio as the parameter
+        String[] rawr = {"songGreenCalx.wav", "songBlackjack.wav", "songWeHaveExplosives.wav", "songBlackdice.wav", "songGuns.wav", "songDeathGrips2.wav", "songBreathe.wav", "songPluto.wav", "songRockNroll.wav"}; // create a new File object with the directory of the audio as the parameter
         play = new Sound(rawr);
 
         addKeyListener(this); //checks if keys are pressed
-        colour = new Color((int)(Math.random() * 0x1000000));
+        colour = new Color((int) (Math.random() * 0x1000000));
     }
 
     /**
@@ -114,10 +114,9 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
     }
 
     /**
-     * paint method
-     *f
-     * Double buffers meaning it writes it offscreen and then writes it again
-     * and compares. consult with Nathan for what that means he can elaborate.
+     * paint method f Double buffers meaning it writes it offscreen and then
+     * writes it again and compares. consult with Nathan for what that means he
+     * can elaborate.
      *
      * @param g
      */
@@ -142,12 +141,12 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
         switch (screen) {
             case (0): //Main Menu
                 draw.setXORMode(colour); // set XOR mode with pinkf
-                draw.drawImage(new ImageIcon ("resources//spaceM.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
+                draw.drawImage(new ImageIcon("resources//spaceM.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
                 draw.drawString("ProtoBlaster 2070: Xortors Prime", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 4 - 50);
                 draw.drawString("Flight Records", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 2 - 52);
                 draw.drawString("Engage", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() / 4 * 3 - 53);
                 draw.drawString("Eject", getWidth() / 2 - (g.getFontMetrics().stringWidth("Title Screen")) / 2, getHeight() - 55);
-                draw.drawRect(getWidth() / 2 -100, getHeight() / 4 * menu - 68, 20, 20);
+                draw.drawRect(getWidth() / 2 - 100, getHeight() / 4 * menu - 68, 20, 20);
                 draw.dispose();
 
                 if (press[2] == 1 && menu > 2) {
@@ -169,10 +168,10 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                             break;
                         case (4):
                             try {
-                                FileWriter fw = new FileWriter("scores.txt");//set place to write to in "Files"
+                                FileWriter fw = new FileWriter("resources//scores.txt");//set place to write to in "Files"
                                 PrintWriter pw = new PrintWriter(fw); //starts writing
                                 for (int i = 0; i < 10; i++) {
-                                    pw.println(scores.get(i));
+                                    pw.println(scores.get(i));                                   
                                 }
                                 pw.close(); //stop writing
                             } catch (IOException a) {
@@ -185,7 +184,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 break;
             case (1): //highscore
                 draw.setXORMode(Color.green); // set XOR mode with pinkf
-                draw.drawImage(new ImageIcon ("resources//boppingHead.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
+                draw.drawImage(new ImageIcon("resources//boppingHead.gif").getImage(), 0, 0, getWidth(), getWidth(), this);
                 draw.drawString("HIGHSCORES", 100, 30);
                 for (int i = 0; i < 10; i++) {
                     draw.drawString(scores.get(i) + "", 100, 60 + 30 * i);
@@ -198,14 +197,13 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 draw.drawImage(new ImageIcon("resources//spaceM.gif").getImage(), -550, -950, getWidth() * 2 + 300, getWidth() * 2 + 300, this); /// draw the background image
 
                 for (int a = 0; a < planes.size(); a++) {
-                    if(planes.get(a).getAngle() < pos+ Math.PI/2 && planes.get(a).getAngle() > pos- Math.PI/2){ //only draws the planes on the screen
+                    if (planes.get(a).getAngle() < pos + Math.PI / 2 && planes.get(a).getAngle() > pos - Math.PI / 2) { //only draws the planes on the screen
                         draw.drawImage(new ImageIcon(planes.get(a).getColour()).getImage(), planes.get(a).getPosistionX() - planes.get(a).getSizeX() / 2, planes.get(a).getPosistionY() - planes.get(a).getSizeY() / 2, planes.get(a).getSizeX(), planes.get(a).getSizeY(), this);
                     }
                 }
                 draw.rotate(-pos, 400, 0); //all the code below wont rotate
 
                 /// ALL THE CODE BELOW WILL NOT ROTATE 
-                
                 if (press[2] == 1) {
                     draw.setXORMode(Color.green);
                 }
@@ -244,8 +242,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 /// for each plane in the plane arrayList
                 for (int a = 0; a < planes.size(); a++) {
                     /// if statement to tell when the game is over and end it
-                    if (
-                            planes.get(a).getColour() != "resources//Explode_fire_1.gif" && /// if the "a"th plane in the planes array is the explosion animation
+                    if (planes.get(a).getColour() != "resources//Explode_fire_1.gif" && /// if the "a"th plane in the planes array is the explosion animation
                             planes.get(a).getAge() > 99 && /// and if that that plane's age is greater than 99
                             planes.get(a).getAge() < 110 && /// and if that age is less than 110
                             pos <= planes.get(a).getAngle() + 0.15 && /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
@@ -263,16 +260,16 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
                 scores.add(score); // add the current score to the score arrayList
                 Collections.sort(scores, Collections.reverseOrder()); // sort the arrayList
                 screen = 4; /// set the screen (gamestate?) to "4"???? which is the game over screen case
-                colour = new Color((int)(Math.random() * 0x1000000));
+                colour = new Color((int) (Math.random() * 0x1000000));
                 break;
             case (4)://Game over case "sceen"
                 draw.setXORMode(colour); // set XOR mode with pink
-                draw.drawImage(new ImageIcon ("resources//title.png").getImage(), 0, 0, getWidth(), getWidth(), this);
+                draw.drawImage(new ImageIcon("resources//title.png").getImage(), 0, 0, getWidth(), getWidth(), this);
                 draw.setFont(new Font("MS Serif", Font.PLAIN, 300)); // set font size larger
-                draw.drawString("GAME", getWidth()/2-g.getFontMetrics().stringWidth("GAME")/2, 200); // draw "game " as text on screen
-                draw.drawString("OVER", getWidth()/2-g.getFontMetrics().stringWidth("OVER")/2, getHeight()/2+280); // draw " over" as text on screen
+                draw.drawString("GAME", getWidth() / 2 - g.getFontMetrics().stringWidth("GAME") / 2, 200); // draw "game " as text on screen
+                draw.drawString("OVER", getWidth() / 2 - g.getFontMetrics().stringWidth("OVER") / 2, getHeight() / 2 + 280); // draw " over" as text on screen
                 draw.setFont(new Font("Consolas", Font.PLAIN, 20)); // set font size to smaller
-                draw.drawString("SCORE: " + score, getWidth()/2-g.getFontMetrics().stringWidth("SCORE: 999")/2, getHeight()/2); // draw "SCORE:" with the score on the screen 
+                draw.drawString("SCORE: " + score, getWidth() / 2 - g.getFontMetrics().stringWidth("SCORE: 999") / 2, getHeight() / 2); // draw "SCORE:" with the score on the screen 
                 draw.dispose(); // end xormode
                 break;
         }
@@ -300,7 +297,6 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println(e.getKeyChar());
         if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
             press[0] = 1;
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -323,7 +319,7 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
             }
         }
         if (e.getKeyCode() == KeyEvent.VK_F) {
-            screen=3;
+            screen = 3;
         }
     }
 
