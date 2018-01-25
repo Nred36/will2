@@ -28,7 +28,7 @@ public class Sound implements LineListener {
     public Sound(String[] tracks) {
         this.tracks = tracks;
 
-        playSound(new File("src//resources//"+tracks[currentSong++]), true);
+        playSound(new File("resources//"+tracks[currentSong++]), true);
     }
 
     /**
@@ -36,7 +36,7 @@ public class Sound implements LineListener {
      * @param effect 
      */
     public Sound(String effect) {
-        playSound(new File("src//resources//"+effect), false);
+        playSound(new File("resources//"+effect), false);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Sound implements LineListener {
     @Override
     public void update(LineEvent event) {
         if (event.toString().startsWith("Stop")) {
-            playSound(new File("src//resources//"+tracks[currentSong]), true);
+            playSound(new File("resources//"+tracks[currentSong]), true);
             if (currentSong + 1 < tracks.length) {
                 currentSong++;
             } else {
