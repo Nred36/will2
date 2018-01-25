@@ -58,7 +58,7 @@ public class Sound implements LineListener {
     }
 
     /**
-     * Overridding the update method
+     * Overriding the update method
      * @param event 
      */
     @Override
