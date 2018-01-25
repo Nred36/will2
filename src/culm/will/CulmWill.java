@@ -239,12 +239,13 @@ public class CulmWill extends JPanel implements ActionListener, KeyListener {
 
                 /// for each plane in the plane arrayList
                 for (int a = 0; a < planes.size(); a++) {
-                    /// if statement to tell when the game is over and end it
+                    /// if statement to tell when the game is over and end it       
+                    System.out.println(planes.get(a).getAngle() + 0.5 + " " + pos + " " + planes.get(a).getAngle() + 0.5);
                     if (planes.get(a).getColour() != "resources//Explode_fire_1.gif" && /// if the "a"th plane in the planes array is the explosion animation
                             planes.get(a).getAge() > 149 && /// and if that that plane's age is greater than 99
                             planes.get(a).getAge() < 160 && /// and if that age is less than 110
-                            pos <= planes.get(a).getAngle() + 0.15 && /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
-                            pos >= planes.get(a).getAngle() - 0.15) { /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
+                            pos <= planes.get(a).getAngle() + 0.5 && /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
+                            pos >= planes.get(a).getAngle() - 0.5) { /// and if the angle of that ship is less than + 0.15 radians away from the angle of the ship rotation
                         screen = 3; /// set the  to "3" which is the "add score" case???? (why isn't this done here?)
                     }
                 }
